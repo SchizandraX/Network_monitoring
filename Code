@@ -1,0 +1,13 @@
+docker run -d \
+--net="host" \
+--pid="host" \
+-v "/:/host:ro,rslave" \
+quay.io/prometheus/node-exporter:latest \
+--path.rootfs=/host
+
+
+docker run -d --name prometheus -p 9090:9090 -v $PWD/prometheus.yml:/etc/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+
+docker run -d --name prometheus -p 9090:9090 -v $PWD/prometheus.yml:/etc/ps/prometheus.yml  prom/prometheus
+
+docker run -d --name=grafana1 -p 3000:3000 grafana/grafana
